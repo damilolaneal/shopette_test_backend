@@ -70,4 +70,11 @@ public class ItemServiceImpl implements ItemService
         itemRepository.findById(id).orElseThrow(RuntimeException::new);
         itemRepository.deleteById(id);
     }
+
+    @Override
+    public void createSampleItem()
+    {
+        Item item = new Item("101", "item 1", "This is item 1", "https://picsum.photos/200/300", 23.40);
+        itemRepository.save(item);
+    }
 }

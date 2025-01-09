@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/items")
 public class ItemController
 {
     private final ItemService itemService;
@@ -31,7 +31,7 @@ public class ItemController
     @PostMapping
     public ResponseEntity<Item> saveItem(@RequestBody Item item)
     {
-        return new ResponseEntity<Item>(itemService.saveItem(item), HttpStatus.CREATED);
+        return new ResponseEntity<>(itemService.saveItem(item), HttpStatus.CREATED);
     }
 
 
@@ -44,14 +44,14 @@ public class ItemController
     //Get by Id Rest Api
     @GetMapping("{id}")
     public ResponseEntity<Item> getEmployeeById(@PathVariable("id") String itemID){
-        return new ResponseEntity<Item>(itemService.getItemById(itemID),HttpStatus.OK);
+        return new ResponseEntity<>(itemService.getItemById(itemID), HttpStatus.OK);
     }
 
     //Update Rest Api
     @PutMapping("{id}")
     public ResponseEntity<Item> updateEmployee(@PathVariable("id") String id,
                                                    @RequestBody Item item){
-        return new ResponseEntity<Item>(itemService.updateItem(item, id),HttpStatus.OK);
+        return new ResponseEntity<>(itemService.updateItem(item, id), HttpStatus.OK);
     }
 
     //Delete Rest Api
@@ -59,6 +59,13 @@ public class ItemController
     public ResponseEntity<String> deleteEmployee(@PathVariable("id") String id){
         //delete employee from db
         itemService.deleteItem(id);
-        return new ResponseEntity<String>("Item deleted Successfully.",HttpStatus.OK);
+        return new ResponseEntity<>("Item deleted Successfully.", HttpStatus.OK);
+    }
+
+    @GetMapping("/create")
+    public String createSampleItem()
+    {
+        itemService.createSampleItem();
+        return "Sample item created successfully";
     }
 }

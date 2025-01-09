@@ -19,5 +19,6 @@ public interface ItemService
     Item getItemById(String id);
     Item updateItem(Item item, String id);
     void deleteItem(String id);
+    void createSampleItem();
 
 }
